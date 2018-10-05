@@ -1,32 +1,95 @@
-<html>
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if title %}
     <title>{{ title }} - SBB</title>
     {% else %}
     <title>Secret Bulletin Board!</title>
     {% endif %}
+
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='bulma.css') }}">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Check if there are any navbar burgers
+    if ($navbarBurgers.length > 0) {
+
+        // Add a click event on each of them
+        $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+
+            // Get the target from the "data-target" attribute
+            const target = el.dataset.target;
+            const $target = document.getElementById(target);
+
+            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+            el.classList.toggle('is-active');
+            $target.classList.toggle('is-active');
+
+        });
+        });
+    }
+
+    });
+    </script>
 </head>
 <body>
-    <div>Secret Bulletin Board: 
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('all_users') }}">All Users</a>
-        {% if current_user.is_anonymous %}
-        <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
-        {% endif %}
+<header role="banner">
+    <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a href="{{ url_for('index') }}" id="logo" class="navbar-item is-size-4">Secret Bulletin Board</a>
+            <div role="button" class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-start">
+                <a href="{{ url_for('index') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('all_users') }}" class="navbar-item">All Users</a>
+            {% if current_user.is_anonymous %}
+            </div>
+            <div class="navbar-end">
+                <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
+            </div>
+            {% else %}
+            <a href="{{ url_for('user', username=current_user.username) }}" class="navbar-item">Profile</a>
+            </div>
+            <div class="navbar-end">
+                <a href="{{ url_for('logout') }}" class="navbar-item">Logout</a>
+            </div>
+            {% endif %}
+        </div>
     </div>
-    <hr>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    {% block content %}{% endblock %}
+    </nav>
+</header>
+
+<main role="main">
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="notification is-link">
+            <button class="delete" onclick="this.parentElement.style.display='none';"></button>
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</main>
 </body>
 </html>
