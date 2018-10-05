@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hello, {{ current_user.username }}!</h1>
+    <h1>Welcome back, {{ current_user.username }}!</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post(cols=48, rows=4, placeholder="Say something to the world...") }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
     {% for post in posts %}
     <div>
-        <h3>{{ post.author.username }}:</h3>
+        <h3><a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>:</h3>
         <p>{{ post.body }}</p>
     </div>
     {% endfor %}

@@ -15,7 +15,7 @@
     <hr>
     {% for post in posts %}
     <div>
-        <h3>{{ post.author.username }}:</h3>
+        <h3><a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>:</h3>
         <p>{{ post.body }}</p>
     </div>
     {% endfor %}
