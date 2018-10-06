@@ -1,7 +1,11 @@
-header {
-    margin-bottom: 1em;
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
 }
 
 a#logo:hover {
-    background: transparent !important;
+    background: transparent;
 }

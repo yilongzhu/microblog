@@ -1,37 +1,72 @@
 {% extends "base.html" %}
 
+{% block content_header %}
+<div class="box">
+    <h2 class="title is-4 is-marginless">Register</h2>
+</div>
+{% endblock %}
+
 {% block content %}
-    <h1>Register</h1>
+<div class="box">
     <form action="" method="post">
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32, autocomplete="off") }}<br>
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64, autocomplete="off") }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
+        <div class="field">
+            {{ form.username.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.username(size=32, autocomplete="off", class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.username.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="field">
+            {{ form.email.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.email(size=64, autocomplete="off", class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.email.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="field">
+            {{ form.password.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.password(size=32, class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.password.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="field">
+            {{ form.password2.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.password2(size=32, class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.password2.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>  
+        </div>
+        <div class="control">{{ form.submit(class="button is-info") }}</div>
     </form>
+</div>
 {% endblock %}

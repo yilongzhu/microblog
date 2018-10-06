@@ -1,25 +1,51 @@
 {% extends "base.html" %}
 
+{% block content_header %}
+<div class="box">
+    <h2 class="title is-4 is-marginless">Login</h2>
+</div>
+{% endblock %}
+
 {% block content %}
-    <h1>Login</h1>
+<div class="box">
     <form action="" method="POST" novalidate>
         {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32, autocomplete="off") }}
-            {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-        <p>{{ form.submit() }}</p>
+        <div class="field">
+            {{ form.username.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.username(size=32, autocomplete="off", class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.username.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="field">
+            {{ form.password.label(class="label") }}
+            <div class="control has-icons-left">
+                {{ form.password(size=32, class="input") }}
+                <span class="icon is-small is-left">
+                    <i class="fas fa-key"></i>
+                </span>
+            </div>
+            <p class="help is-danger">
+                {% for error in form.password.errors %}
+                {{ error }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="field is-horizontal">
+            <div class="control">{{ form.remember_me(class="checkbox") }}</div>
+            {{ form.remember_me.label(class="label") }}    
+        </div>
+        <div class="control">
+            <p>{{ form.submit(class="button is-info") }}</p>
+        </div>
     </form>
     <p><a href="{{ url_for('register') }}">New user?</a></p>
+</div>
 {% endblock %}

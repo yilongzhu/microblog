@@ -1,34 +1,42 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <section>
-        <h2 class="title is-4 is-marginless">Welcome back, {{ current_user.username }}!</h2>
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
+{% block content_header %}
+<div class="box">
+    <h2 class="title is-4 is-marginless">Welcome back, {{ current_user.username }}!</h2>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <div class="field">
             <div class="control">
                 {{ form.post(class="textarea is-info is-rounded has-fixed-size", cols=48, rows=4, autofocus=true, placeholder="Say something to the world...") }}
             </div>
-            {% for error in form.post.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-            <div class="control">
-            {{ form.submit(class="button is-info is-rounded") }}
-            </div>
-        </form>
-        <section>
-        {% for post in posts %}
-            {% include '_post.html' %}
-        {% endfor %}
-        </section>
-        {% if prev_url %}
-        <a href="{{ prev_url }}" class="button is-info is-rounded">Newer</a>
-        {% else %}
-        <a href="{{ prev_url }}" disabled class="button is-info is-rounded">Newer</a>
-        {% endif %}
-        {% if next_url %}
-        <a href="{{ next_url }}" class="button is-info is-rounded">Older</a>
-        {% else %}
-        <a href="{{ next_url }}" disabled class="button is-info is-rounded">Older</a>
-        {% endif %}
-    </section>
+            <p class="help">
+                {% for error in form.post.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div class="control">
+            {{ form.submit(class="button is-info") }}
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div>
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+    {% if prev_url %}
+    <a href="{{ prev_url }}" class="button is-info">Newer</a>
+    {% else %}
+    <a href="{{ prev_url }}" disabled class="button is-info">Newer</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}" class="button is-info">Older</a>
+    {% else %}
+    <a href="{{ next_url }}" disabled class="button is-info">Older</a>
+    {% endif %}
+</div>
 {% endblock %}

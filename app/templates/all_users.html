@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
+{% block content_header %}
+<div class="box">
+    <h2 class="title is-4 is-marginless">All Users</h2>
+</div>
+{% endblock %}
+
 {% block content %}
-    <h1>All Users</h1>
-    <ul>
+<div class="box">
+    <ul class="menu-list">
         {% for user in users %}
         <li><a href="{{ url_for('user', username=user.username) }}">{{ user.username }}</a></li>
         {% endfor %}
     </ul>
+</div>
 {% endblock %}
