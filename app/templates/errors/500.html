@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content_header %}
+<div class="box">
+    <h2 class="title is-4 is-marginless">Error 500</h2>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <h2 class="title is-4">An unexpected error has occurred</h1>
+    <h3 class="subtitle is-5">The administrator has been notified. Sorry for the inconvenience!</h3>
+    <a href="{{ url_for('main.index') }}" class="button is-info">Back</a>
+</div>
+{% endblock %}

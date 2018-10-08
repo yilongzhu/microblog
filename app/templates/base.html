@@ -20,7 +20,7 @@
     <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a href="{{ url_for('index') }}" id="logo" class="navbar-item is-size-4">Secret Bulletin Board</a>
+            <a href="{{ url_for('main.index') }}" id="logo" class="navbar-item is-size-4">Secret Bulletin Board</a>
             <div role="button" class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -28,19 +28,19 @@
             </div>
         </div>
         <div class="navbar-menu" id="navMenu">
-            <div class="navbar-start">
-                <a href="{{ url_for('index') }}" class="navbar-item">Home</a>
-                <a href="{{ url_for('all_users') }}" class="navbar-item">All Users</a>
             {% if current_user.is_anonymous %}
-            </div>
             <div class="navbar-end">
-                <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
+                <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
+                <a href="{{ url_for('auth.register') }}" class="navbar-item">Register</a>
             </div>
             {% else %}
-            <a href="{{ url_for('user', username=current_user.username) }}" class="navbar-item">Profile</a>
+            <div class="navbar-start">
+                <a href="{{ url_for('main.index') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('main.all_users') }}" class="navbar-item">All Users</a>
+                <a href="{{ url_for('main.user', username=current_user.username) }}" class="navbar-item">Profile</a>
             </div>
             <div class="navbar-end">
-                <a href="{{ url_for('logout') }}" class="navbar-item">Logout</a>
+                <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
             </div>
             {% endif %}
         </div>

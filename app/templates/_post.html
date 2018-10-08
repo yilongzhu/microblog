@@ -8,7 +8,7 @@
     <div class="media-content">
       <div class="content">
         <p>
-          <a href="{{ url_for('user', username=post.author.username) }}"><strong>{{ post.author.username }}</a>:</strong>
+          <a href="{{ url_for('main.user', username=post.author.username) }}"><strong>{{ post.author.username }}</a>:</strong>
           <br>
           {{ post.body }}
         </p>
