@@ -9,3 +9,11 @@ body {
 a#logo:hover {
     background: transparent;
 }
+
+.box:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
+hr {
+    margin: .5rem 0;
+}
