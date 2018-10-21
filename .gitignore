@@ -113,3 +113,5 @@ dmypy.json
 #vscode
 .vscode/
 logs/
+
+app.db
